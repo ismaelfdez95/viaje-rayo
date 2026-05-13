@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viaje Rayo - Conference League</title>
+  <meta name="description" content="Itinerario compartido del viaje para ver la final de la Conference League." />
+  <style>
+    :root{
+      --bg:#f4f4f5; --card:#ffffff; --ink:#18181b; --muted:#71717a; --line:#e4e4e7;
+      --dark:#09090b; --soft:#fafafa; --accent:#ef4444; --accent2:#f59e0b;
+      --radius:26px; --shadow:0 14px 40px rgba(0,0,0,.10);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:inherit}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px}
+    .hero{position:relative;overflow:hidden;background:var(--dark);color:white;border-radius:34px;padding:28px;box-shadow:var(--shadow)}
+    .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 0%,rgba(255,255,255,.22),transparent 32%),radial-gradient(circle at 0% 100%,rgba(239,68,68,.35),transparent 36%)}
+    .hero>*{position:relative}.badges{display:flex;flex-wrap:wrap;gap:10px}.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;font-size:14px}
+    h1{font-size:clamp(38px,8vw,72px);line-height:.94;margin:34px 0 14px;font-weight:950;letter-spacing:-.05em}.lead{max-width:720px;color:rgba(255,255,255,.76);font-size:18px;line-height:1.5}
+    .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}.timebox{background:rgba(255,255,255,.12);border-radius:22px;text-align:center;padding:14px 8px}.num{font-size:clamp(28px,9vw,54px);font-weight:950}.lbl{font-size:11px;color:rgba(255,255,255,.65);letter-spacing:.16em;text-transform:uppercase}
+    .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}.quick .card{padding:20px}.big{font-size:26px;font-weight:900;margin-top:4px}.muted{color:var(--muted)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+    .section{margin-top:16px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:0 0 12px}.section-title h2{font-size:30px;margin:0;letter-spacing:-.03em}.section-title p{margin:5px 0 0;color:var(--muted)}
+    .map-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.map-card{padding:16px}.map{height:440px;position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#fafafa,#ddd,#cfcfcf)}
+    .route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.stop{position:absolute;transform:translate(-50%,-50%);border:4px solid white;background:var(--dark);color:white;border-radius:999px;width:44px;height:44px;font-weight:900;box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer}.stop:hover{scale:1.1}.stop span{position:absolute;top:48px;left:50%;transform:translateX(-50%);white-space:nowrap;background:white;color:var(--ink);border-radius:999px;padding:6px 10px;font-size:12px;box-shadow:0 6px 18px rgba(0,0,0,.14)}
+    .stop-note{position:absolute;left:16px;top:16px;background:rgba(255,255,255,.88);padding:12px 14px;border-radius:18px;font-size:13px;color:var(--muted);box-shadow:0 6px 18px rgba(0,0,0,.10)}
+    .panel{padding:22px}.pill{display:inline-block;background:#f4f4f5;border-radius:999px;padding:7px 12px;text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:850;color:#52525b}.panel h3{font-size:34px;margin:16px 0 6px;letter-spacing:-.04em}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}.info{background:var(--soft);border-radius:18px;padding:14px}.info small{display:block;color:var(--muted);margin-bottom:3px}.info strong{font-size:16px}.detail{background:var(--soft);border-radius:16px;padding:12px 14px;margin-top:8px;color:#3f3f46}
+    .segments{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.segment{padding:18px}.segment-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.segment h3{margin:0;font-size:22px;letter-spacing:-.03em}.status{border-radius:999px;padding:6px 10px;font-size:12px;font-weight:850;background:#f4f4f5;white-space:nowrap}.status.ok{background:#dcfce7;color:#166534}.status.no{background:#fee2e2;color:#991b1b}.journey{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;background:var(--soft);border-radius:20px;padding:14px;margin:16px 0}.journey .right{text-align:right}.hour{font-size:23px;font-weight:950}.arrow{background:white;border-radius:999px;padding:8px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.field{border:1px solid #f1f1f1;border-radius:16px;padding:12px}.field small{display:block;color:var(--muted);margin-bottom:3px}.notes{background:#fffbeb;color:#92400e;border-radius:16px;padding:12px;margin-top:12px;font-size:14px}.edit-help{margin-top:18px;background:#ecfeff;border:1px solid #cffafe;border-radius:22px;padding:16px;color:#155e75;line-height:1.5}
+    @media(max-width:820px){.wrap{padding:12px}.hero{padding:22px;border-radius:28px}.quick,.map-grid,.segments{grid-template-columns:1fr}.countdown{gap:7px}.map{height:390px}.section-title{display:block}.fields{grid-template-columns:1fr}.stop span{font-size:11px}.info-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!--
+    COMO EDITAR RAPIDO
+    1) Cambia la fecha/hora de inicio en la variable FECHA_INICIO.
+    2) Edita PARADAS para cambiar el mapa y la información de cada parada.
+    3) Edita TRAYECTOS para cambiar vuelos, trenes, buses, entradas, localizadores, terminales, etc.
+    4) Guarda el archivo y súbelo a GitHub. GitHub Pages actualizará la web automáticamente.
+  -->
+  <main class="wrap">
+    <section class="hero">
+      <div class="badges">
+        <div class="badge">👥 Viaje con amigos</div>
+        <div class="badge">⚡ Rayo Vallecano</div>
+        <div class="badge">🏆 Final Conference League</div>
+      </div>
+      <h1>Roadtrip europeo rayista</h1>
+      <p class="lead">Itinerario compartido del viaje del 26 al 28 de mayo. Todo en una web simple, gratuita y pensada para móvil.</p>
+      <div class="countdown" id="countdown"></div>
+    </section>
+
+    <section class="quick">
+      <div class="card"><div class="muted">Duración</div><div class="big">3 días</div></div>
+      <div class="card"><div class="muted">Motivo</div><div class="big">Final europea</div></div>
+      <div class="card"><div class="muted">Grupo</div><div class="big">Abonados del Rayo</div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div><h2>Mapa interactivo</h2><p>Pulsa cada punto para ver llegada, salida, escala y siguiente destino.</p></div>
+      </div>
+      <div class="map-grid">
+        <div class="card map-card">
+          <div class="map" id="map">
+            <svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M18 72 C32 55, 40 48, 48 45 S62 26, 76 26" fill="none" stroke="rgba(24,24,27,.45)" stroke-width="1.2" stroke-dasharray="3 2" />
+              <path d="M76 26 C72 34, 66 46, 66 58" fill="none" stroke="rgba(24,24,27,.35)" stroke-width="1" stroke-dasharray="3 2" />
+            </svg>
+            <div class="stop-note">Mapa esquemático editable.<br>Más adelante se puede cambiar por mapa real.</div>
+          </div>
+        </div>
+        <aside class="card panel" id="stopPanel"></aside>
+      </div>
+    </section>
+
+    <section class="section card" style="padding:20px">
+      <div class="section-title">
+        <div><h2>Listado de trayectos</h2><p>Tarjetas editables para tener localizadores, terminales, facturación y notas.</p></div>
+        <span class="pill" id="segmentCount"></span>
+      </div>
+      <div class="segments" id="segments"></div>
+      <div class="edit-help">
+        <strong>Zona pensada para editar fácil:</strong> abre este archivo, busca <code>PARADAS</code> o <code>TRAYECTOS</code>, cambia los textos entre comillas y vuelve a subir el archivo al repositorio.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // =========================
+    // DATOS EDITABLES DEL VIAJE
+    // =========================
+
+    const FECHA_INICIO = "2026-05-26T07:00:00+02:00";
+
+    const PARADAS = [
+      {
+        id: "madrid",
+        nombre: "Madrid",
+        tipo: "Salida",
+        fecha: "26 mayo",
+        llegada: "—",
+        salida: "07:00",
+        siguiente: "Aeropuerto / estación",
+        posicion: { top: "72%", left: "18%" },
+        resumen: "Punto de encuentro y salida del grupo.",
+        detalles: ["Quedada pendiente de confirmar", "Revisar documentación y entradas", "Salida hacia el primer transporte"]
+      },
+      {
+        id: "escala",
+        nombre: "Escala",
+        tipo: "Conexión",
+        fecha: "26 mayo",
+        llegada: "10:15",
+        salida: "12:05",
+        siguiente: "Ciudad de destino",
+        posicion: { top: "45%", left: "48%" },
+        resumen: "Parada intermedia con margen para cambiar de transporte.",
+        detalles: ["Escala: sí", "Tiempo de conexión: 1h 50m", "Terminal / andén por confirmar"]
+      },
+      {
+        id: "destino",
+        nombre: "Destino final",
+        tipo: "Llegada",
+        fecha: "26 mayo",
+        llegada: "14:20",
+        salida: "—",
+        siguiente: "Hotel / alojamiento",
+        posicion: { top: "26%", left: "76%" },
+        resumen: "Llegada, check-in y tarde libre antes del partido.",
+        detalles: ["Traslado al alojamiento", "Check-in pendiente", "Plan de tarde con el grupo"]
+      },
+      {
+        id: "estadio",
+        nombre: "Estadio",
+        tipo: "Final Conference League",
+        fecha: "27 mayo",
+        llegada: "Por definir",
+        salida: "Tras el partido",
+        siguiente: "Celebración / vuelta al alojamiento",
+        posicion: { top: "18%", left: "62%" },
+        resumen: "Día grande: final europea del Rayo Vallecano.",
+        detalles: ["Entradas: abonados", "Hora de acceso por confirmar", "Punto de encuentro rayista pendiente"]
+      },
+      {
+        id: "vuelta",
+        nombre: "Regreso",
+        tipo: "Vuelta",
+        fecha: "28 mayo",
+        llegada: "—",
+        salida: "11:30",
+        siguiente: "Madrid",
+        posicion: { top: "58%", left: "66%" },
+        resumen: "Salida de vuelta a casa.",
+        detalles: ["Revisar check-out", "Transporte al aeropuerto / estación", "Llegada a Madrid pendiente"]
+      }
+    ];
+
+    const TRAYECTOS = [
+      {
+        titulo: "Madrid → Escala",
+        tipo: "✈️ Vuelo",
+        fecha: "26 mayo 2026",
+        salidaHora: "07:00",
+        llegadaHora: "10:15",
+        origen: "Madrid",
+        destino: "Escala",
+        terminalSalida: "T4 / por confirmar",
+        terminalLlegada: "Terminal por confirmar",
+        compraId: "ABC123-EJEMPLO",
+        facturado: false,
+        equipaje: "Equipaje de mano",
+        notas: "Añadir aerolínea, localizador, asientos y enlace de check-in."
+      },
+      {
+        titulo: "Escala → Destino final",
+        tipo: "✈️ Vuelo",
+        fecha: "26 mayo 2026",
+        salidaHora: "12:05",
+        llegadaHora: "14:20",
+        origen: "Escala",
+        destino: "Destino final",
+        terminalSalida: "Por confirmar",
+        terminalLlegada: "Por confirmar",
+        compraId: "DEF456-EJEMPLO",
+        facturado: false,
+        equipaje: "Incluido / por revisar",
+        notas: "Marcar si la escala es de la misma reserva o son compras separadas."
+      },
+      {
+        titulo: "Alojamiento → Estadio",
+        tipo: "🏆 Partido",
+        fecha: "27 mayo 2026",
+        salidaHora: "Por definir",
+        llegadaHora: "Por definir",
+        origen: "Alojamiento",
+        destino: "Estadio",
+        terminalSalida: "—",
+        terminalLlegada: "Puerta / acceso por confirmar",
+        compraId: "Entradas abonados Rayo",
+        facturado: true,
+        equipaje: "Bufanda, entrada y DNI",
+        notas: "Añadir horario del partido, puerta, sector, fila y asiento."
+      },
+      {
+        titulo: "Destino final → Madrid",
+        tipo: "🚆 Vuelta",
+        fecha: "28 mayo 2026",
+        salidaHora: "11:30",
+        llegadaHora: "16:45",
+        origen: "Destino final",
+        destino: "Madrid",
+        terminalSalida: "Por confirmar",
+        terminalLlegada: "Por confirmar",
+        compraId: "GHI789-EJEMPLO",
+        facturado: false,
+        equipaje: "Pendiente",
+        notas: "Añadir transporte real, localizador y detalles de llegada."
+      }
+    ];
+
+    // =========================
+    // NO HACE FALTA TOCAR DE AQUI PARA ABAJO
+    // =========================
+
+    function renderCountdown(){
+      const target = new Date(FECHA_INICIO).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const minutes = Math.floor((diff / (1000*60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      const data = [["Días",days],["Horas",hours],["Min",minutes],["Seg",seconds]];
+      document.getElementById("countdown").innerHTML = data.map(([label,value]) => `
+        <div class="timebox"><div class="num">${String(value).padStart(2,"0")}</div><div class="lbl">${label}</div></div>
+      `).join("");
+    }
+
+    function selectStop(id){
+      const stop = PARADAS.find(p => p.id === id) || PARADAS[0];
+      document.getElementById("stopPanel").innerHTML = `
+        <span class="pill">${stop.tipo}</span>
+        <h3>${stop.nombre}</h3>
+        <p class="muted">${stop.resumen}</p>
+        <div class="info-grid">
+          <div class="info"><small>Fecha</small><strong>${stop.fecha}</strong></div>
+          <div class="info"><small>Siguiente</small><strong>${stop.siguiente}</strong></div>
+          <div class="info"><small>Llegada</small><strong>${stop.llegada}</strong></div>
+          <div class="info"><small>Salida</small><strong>${stop.salida}</strong></div>
+        </div>
+        ${stop.detalles.map(d => `<div class="detail">› ${d}</div>`).join("")}
+      `;
+    }
+
+    function renderMap(){
+      const map = document.getElementById("map");
+      PARADAS.forEach((p, index) => {
+        const btn = document.createElement("button");
+        btn.className = "stop";
+        btn.style.top = p.posicion.top;
+        btn.style.left = p.posicion.left;
+        btn.innerHTML = `${index + 1}<span>${p.nombre}</span>`;
+        btn.onclick = () => selectStop(p.id);
+        map.appendChild(btn);
+      });
+      selectStop(PARADAS[0].id);
+    }
+
+    function renderSegments(){
+      document.getElementById("segmentCount").textContent = `${TRAYECTOS.length} movimientos`;
+      document.getElementById("segments").innerHTML = TRAYECTOS.map(t => `
+        <article class="segment card">
+          <div class="segment-head">
+            <div>
+              <div class="muted">${t.tipo} · ${t.fecha}</div>
+              <h3>${t.titulo}</h3>
+            </div>
+            <span class="status ${t.facturado ? "ok" : "no"}">${t.facturado ? "Facturado" : "No facturado"}</span>
+          </div>
+          <div class="journey">
+            <div><div class="muted">Salida</div><div class="hour">${t.salidaHora}</div><div>${t.origen}</div></div>
+            <div class="arrow">→</div>
+            <div class="right"><div class="muted">Llegada</div><div class="hour">${t.llegadaHora}</div><div>${t.destino}</div></div>
+          </div>
+          <div class="fields">
+            <div class="field"><small>Terminal salida</small><strong>${t.terminalSalida}</strong></div>
+            <div class="field"><small>Terminal llegada</small><strong>${t.terminalLlegada}</strong></div>
+            <div class="field"><small>ID compra / localizador</small><strong>${t.compraId}</strong></div>
+            <div class="field"><small>Equipaje</small><strong>${t.equipaje}</strong></div>
+          </div>
+          <div class="notes">${t.notas}</div>
+        </article>
+      `).join("");
+    }
+
+    renderCountdown();
+    setInterval(renderCountdown, 1000);
+    renderMap();
+    renderSegments();
+  </script>
+</body>
+</html>
