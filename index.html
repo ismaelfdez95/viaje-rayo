@@ -3,302 +3,764 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Viaje Rayo - Conference League</title>
-  <meta name="description" content="Itinerario compartido del viaje para ver la final de la Conference League." />
+  <title>Vallecas conquista Europa</title>
+  <meta name="description" content="Itinerario del viaje del Rayo Vallecano a la final europea" />
   <style>
-    :root{
-      --bg:#f4f4f5; --card:#ffffff; --ink:#18181b; --muted:#71717a; --line:#e4e4e7;
-      --dark:#09090b; --soft:#fafafa; --accent:#ef4444; --accent2:#f59e0b;
-      --radius:26px; --shadow:0 14px 40px rgba(0,0,0,.10);
+    :root {
+      --rayo-red: #d71920;
+      --rayo-dark: #111111;
+      --rayo-white: #ffffff;
+      --soft: #f5f5f5;
+      --muted: #666666;
+      --line: #e5e5e5;
+      --card: #ffffff;
+      --shadow: 0 18px 40px rgba(0,0,0,.12);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    a{color:inherit}
-    .wrap{max-width:1120px;margin:0 auto;padding:18px}
-    .hero{position:relative;overflow:hidden;background:var(--dark);color:white;border-radius:34px;padding:28px;box-shadow:var(--shadow)}
-    .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 0%,rgba(255,255,255,.22),transparent 32%),radial-gradient(circle at 0% 100%,rgba(239,68,68,.35),transparent 36%)}
-    .hero>*{position:relative}.badges{display:flex;flex-wrap:wrap;gap:10px}.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;font-size:14px}
-    h1{font-size:clamp(38px,8vw,72px);line-height:.94;margin:34px 0 14px;font-weight:950;letter-spacing:-.05em}.lead{max-width:720px;color:rgba(255,255,255,.76);font-size:18px;line-height:1.5}
-    .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}.timebox{background:rgba(255,255,255,.12);border-radius:22px;text-align:center;padding:14px 8px}.num{font-size:clamp(28px,9vw,54px);font-weight:950}.lbl{font-size:11px;color:rgba(255,255,255,.65);letter-spacing:.16em;text-transform:uppercase}
-    .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}.quick .card{padding:20px}.big{font-size:26px;font-weight:900;margin-top:4px}.muted{color:var(--muted)}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.06)}
-    .section{margin-top:16px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:0 0 12px}.section-title h2{font-size:30px;margin:0;letter-spacing:-.03em}.section-title p{margin:5px 0 0;color:var(--muted)}
-    .map-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.map-card{padding:16px}.map{height:440px;position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#fafafa,#ddd,#cfcfcf)}
-    .route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.stop{position:absolute;transform:translate(-50%,-50%);border:4px solid white;background:var(--dark);color:white;border-radius:999px;width:44px;height:44px;font-weight:900;box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer}.stop:hover{scale:1.1}.stop span{position:absolute;top:48px;left:50%;transform:translateX(-50%);white-space:nowrap;background:white;color:var(--ink);border-radius:999px;padding:6px 10px;font-size:12px;box-shadow:0 6px 18px rgba(0,0,0,.14)}
-    .stop-note{position:absolute;left:16px;top:16px;background:rgba(255,255,255,.88);padding:12px 14px;border-radius:18px;font-size:13px;color:var(--muted);box-shadow:0 6px 18px rgba(0,0,0,.10)}
-    .panel{padding:22px}.pill{display:inline-block;background:#f4f4f5;border-radius:999px;padding:7px 12px;text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:850;color:#52525b}.panel h3{font-size:34px;margin:16px 0 6px;letter-spacing:-.04em}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}.info{background:var(--soft);border-radius:18px;padding:14px}.info small{display:block;color:var(--muted);margin-bottom:3px}.info strong{font-size:16px}.detail{background:var(--soft);border-radius:16px;padding:12px 14px;margin-top:8px;color:#3f3f46}
-    .segments{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.segment{padding:18px}.segment-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.segment h3{margin:0;font-size:22px;letter-spacing:-.03em}.status{border-radius:999px;padding:6px 10px;font-size:12px;font-weight:850;background:#f4f4f5;white-space:nowrap}.status.ok{background:#dcfce7;color:#166534}.status.no{background:#fee2e2;color:#991b1b}.journey{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;background:var(--soft);border-radius:20px;padding:14px;margin:16px 0}.journey .right{text-align:right}.hour{font-size:23px;font-weight:950}.arrow{background:white;border-radius:999px;padding:8px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.field{border:1px solid #f1f1f1;border-radius:16px;padding:12px}.field small{display:block;color:var(--muted);margin-bottom:3px}.notes{background:#fffbeb;color:#92400e;border-radius:16px;padding:12px;margin-top:12px;font-size:14px}.edit-help{margin-top:18px;background:#ecfeff;border:1px solid #cffafe;border-radius:22px;padding:16px;color:#155e75;line-height:1.5}
-    @media(max-width:820px){.wrap{padding:12px}.hero{padding:22px;border-radius:28px}.quick,.map-grid,.segments{grid-template-columns:1fr}.countdown{gap:7px}.map{height:390px}.section-title{display:block}.fields{grid-template-columns:1fr}.stop span{font-size:11px}.info-grid{grid-template-columns:1fr}}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      color: var(--rayo-dark);
+    }
+
+    a { color: inherit; }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(17,17,17,.96), rgba(17,17,17,.78)),
+        radial-gradient(circle at top right, rgba(215,25,32,.55), transparent 40%);
+      color: white;
+      box-shadow: var(--shadow);
+      min-height: 420px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -120px -80px auto auto;
+      width: 420px;
+      height: 620px;
+      background: var(--rayo-red);
+      transform: rotate(38deg);
+      opacity: .92;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(115deg, transparent 0 47%, rgba(255,255,255,.9) 47% 53%, transparent 53% 100%);
+      opacity: .12;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding: 28px;
+      display: grid;
+      gap: 28px;
+    }
+
+    .crest {
+      width: 86px;
+      height: 86px;
+      border-radius: 26px;
+      background: white;
+      color: var(--rayo-dark);
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      line-height: .85;
+      box-shadow: 0 14px 30px rgba(0,0,0,.24);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .crest::before {
+      content: "";
+      position: absolute;
+      width: 36px;
+      height: 130px;
+      background: var(--rayo-red);
+      transform: rotate(33deg);
+      opacity: .95;
+    }
+
+    .crest span { position: relative; z-index: 1; font-size: 22px; text-align: center; }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 8vw, 84px);
+      line-height: .9;
+      letter-spacing: -0.06em;
+      max-width: 820px;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      color: rgba(255,255,255,.78);
+      font-size: 18px;
+      margin: 14px 0 0;
+      line-height: 1.5;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 680px;
+      margin-top: 24px;
+    }
+
+    .count-box {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 22px;
+      padding: 16px 10px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .count-box strong { display: block; font-size: clamp(26px, 7vw, 48px); }
+    .count-box small { color: rgba(255,255,255,.62); text-transform: uppercase; letter-spacing: .12em; font-size: 11px; }
+
+    .quick-info {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .mini-card, .section, .stop-info, .segment {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 12px 30px rgba(0,0,0,.06);
+    }
+
+    .mini-card { padding: 20px; }
+    .mini-card p { margin: 0 0 6px; color: var(--muted); font-size: 14px; }
+    .mini-card strong { font-size: 23px; }
+
+    .grid-map {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+
+    .section { padding: 20px; }
+    .section-title { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 16px; }
+    .section-title h2 { margin: 0; font-size: 30px; letter-spacing: -0.04em; }
+    .section-title p { margin: 4px 0 0; color: var(--muted); }
+
+    .map {
+      position: relative;
+      min-height: 520px;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 75%, rgba(215,25,32,.12), transparent 22%),
+        radial-gradient(circle at 76% 24%, rgba(17,17,17,.1), transparent 24%),
+        linear-gradient(135deg, #eeeeee, #dcdcdc);
+    }
+
+    .route-line {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border: 0;
+      background: var(--rayo-dark);
+      color: white;
+      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0,0,0,.26);
+      outline: 4px solid white;
+      transition: .18s ease;
+    }
+
+    .pin:hover, .pin.active { background: var(--rayo-red); transform: translate(-50%, -50%) scale(1.16); }
+    .pin-label {
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background: white;
+      color: var(--rayo-dark);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,.12);
+    }
+
+    .stop-info { padding: 22px; }
+    .tag { display: inline-flex; border-radius: 999px; padding: 7px 11px; background: #f1f1f1; color: #555; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; }
+    .stop-info h3 { margin: 14px 0 8px; font-size: 34px; letter-spacing: -0.05em; }
+    .stop-info p { color: var(--muted); line-height: 1.5; }
+
+    .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+    .fact { background: #f7f7f7; border-radius: 18px; padding: 13px; }
+    .fact small { color: var(--muted); display: block; margin-bottom: 3px; }
+    .fact strong { font-size: 15px; }
+
+    .details { padding-left: 18px; color: #444; line-height: 1.55; }
+    .details li { margin: 7px 0; }
+
+    .segments { margin-top: 18px; }
+    .segments-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .segment { padding: 18px; }
+    .segment-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .segment h3 { margin: 0; font-size: 22px; letter-spacing: -0.04em; }
+    .segment .mode { color: white; background: var(--rayo-dark); border-radius: 999px; padding: 7px 10px; font-size: 12px; font-weight: 800; }
+    .time-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; background: #f7f7f7; border-radius: 20px; padding: 14px; margin: 16px 0; }
+    .time-row .arrow { color: var(--rayo-red); font-weight: 950; }
+    .time-row small { color: var(--muted); }
+    .time-row strong { display: block; font-size: 22px; }
+    .right { text-align: right; }
+    .segment-data { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .data { border: 1px solid #eee; border-radius: 16px; padding: 11px; }
+    .data small { display: block; color: var(--muted); margin-bottom: 4px; }
+    .note { margin-top: 12px; background: #fff4f4; border-left: 4px solid var(--rayo-red); border-radius: 14px; padding: 12px; color: #531012; font-size: 14px; line-height: 1.45; }
+
+    .edit-help {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 22px;
+      background: #111;
+      color: white;
+      line-height: 1.55;
+    }
+    .edit-help code { background: rgba(255,255,255,.12); padding: 2px 6px; border-radius: 8px; }
+
+    @media (max-width: 860px) {
+      .hero-inner { padding: 22px; }
+      .quick-info, .grid-map, .segments-grid { grid-template-columns: 1fr; }
+      .map { min-height: 470px; }
+      .countdown { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .page { padding: 10px; }
+      .hero { border-radius: 24px; }
+      .hero::before { width: 250px; height: 560px; right: -110px; }
+      .section, .stop-info, .segment { border-radius: 22px; }
+      .facts, .segment-data { grid-template-columns: 1fr; }
+      .pin-label { font-size: 11px; }
+      .section-title { align-items: start; flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <!--
-    COMO EDITAR RAPIDO
-    1) Cambia la fecha/hora de inicio en la variable FECHA_INICIO.
-    2) Edita PARADAS para cambiar el mapa y la información de cada parada.
-    3) Edita TRAYECTOS para cambiar vuelos, trenes, buses, entradas, localizadores, terminales, etc.
-    4) Guarda el archivo y súbelo a GitHub. GitHub Pages actualizará la web automáticamente.
-  -->
-  <main class="wrap">
+  <main class="page">
     <section class="hero">
-      <div class="badges">
-        <div class="badge">👥 Viaje con amigos</div>
-        <div class="badge">⚡ Rayo Vallecano</div>
-        <div class="badge">🏆 Final Conference League</div>
-      </div>
-      <h1>Roadtrip europeo rayista</h1>
-      <p class="lead">Itinerario compartido del viaje del 26 al 28 de mayo. Todo en una web simple, gratuita y pensada para móvil.</p>
-      <div class="countdown" id="countdown"></div>
-    </section>
-
-    <section class="quick">
-      <div class="card"><div class="muted">Duración</div><div class="big">3 días</div></div>
-      <div class="card"><div class="muted">Motivo</div><div class="big">Final europea</div></div>
-      <div class="card"><div class="muted">Grupo</div><div class="big">Abonados del Rayo</div></div>
-    </section>
-
-    <section class="section">
-      <div class="section-title">
-        <div><h2>Mapa interactivo</h2><p>Pulsa cada punto para ver llegada, salida, escala y siguiente destino.</p></div>
-      </div>
-      <div class="map-grid">
-        <div class="card map-card">
-          <div class="map" id="map">
-            <svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M18 72 C32 55, 40 48, 48 45 S62 26, 76 26" fill="none" stroke="rgba(24,24,27,.45)" stroke-width="1.2" stroke-dasharray="3 2" />
-              <path d="M76 26 C72 34, 66 46, 66 58" fill="none" stroke="rgba(24,24,27,.35)" stroke-width="1" stroke-dasharray="3 2" />
-            </svg>
-            <div class="stop-note">Mapa esquemático editable.<br>Más adelante se puede cambiar por mapa real.</div>
+      <div class="hero-inner">
+        <div class="crest" aria-label="Escudo inspirado en el Rayo"><span>RVM</span></div>
+        <div>
+          <h1>Vallecas conquista Europa</h1>
+          <p class="subtitle">Itinerario compartido del 26 al 28 de mayo para tener a mano vuelos, escalas, hoteles, traslados y partido desde el móvil.</p>
+          <div class="countdown" id="countdown">
+            <div class="count-box"><strong id="days">00</strong><small>Días</small></div>
+            <div class="count-box"><strong id="hours">00</strong><small>Horas</small></div>
+            <div class="count-box"><strong id="minutes">00</strong><small>Min</small></div>
+            <div class="count-box"><strong id="seconds">00</strong><small>Seg</small></div>
           </div>
         </div>
-        <aside class="card panel" id="stopPanel"></aside>
       </div>
     </section>
 
-    <section class="section card" style="padding:20px">
+    <section class="quick-info">
+      <article class="mini-card"><p>Inicio del viaje</p><strong>26 mayo · 17:55</strong></article>
+      <article class="mini-card"><p>Destino clave</p><strong>Red Bull Arena</strong></article>
+      <article class="mini-card"><p>Regreso a Madrid</p><strong>28 mayo · 18:00</strong></article>
+    </section>
+
+    <section class="grid-map">
+      <div class="section">
+        <div class="section-title">
+          <div>
+            <h2>Mapa de paradas</h2>
+            <p>Pulsa cada punto para ver horarios, escala y siguiente movimiento.</p>
+          </div>
+        </div>
+        <div class="map" id="map">
+          <svg class="route-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M13 78 C30 45, 38 28, 50 24 S70 34, 76 50 S64 60, 56 72 S75 60, 85 52" fill="none" stroke="rgba(17,17,17,.42)" stroke-width="1.1" stroke-dasharray="3 2" />
+            <path d="M85 52 C78 30, 62 20, 52 22 S42 34, 48 43" fill="none" stroke="rgba(215,25,32,.55)" stroke-width="1" stroke-dasharray="2 2" />
+          </svg>
+        </div>
+      </div>
+
+      <aside class="stop-info" id="stopInfo"></aside>
+    </section>
+
+    <section class="section segments">
       <div class="section-title">
-        <div><h2>Listado de trayectos</h2><p>Tarjetas editables para tener localizadores, terminales, facturación y notas.</p></div>
-        <span class="pill" id="segmentCount"></span>
+        <div>
+          <h2>Listado de trayectos</h2>
+          <p>Información principal de vuelos, trenes, escalas y traslados.</p>
+        </div>
       </div>
-      <div class="segments" id="segments"></div>
-      <div class="edit-help">
-        <strong>Zona pensada para editar fácil:</strong> abre este archivo, busca <code>PARADAS</code> o <code>TRAYECTOS</code>, cambia los textos entre comillas y vuelve a subir el archivo al repositorio.
-      </div>
+      <div class="segments-grid" id="segmentsGrid"></div>
+    </section>
+
+    <section class="edit-help">
+      <strong>Zona fácil de editar:</strong> abre este archivo en GitHub, pulsa el lápiz y busca <code>CONFIGURACION EDITABLE</code>. Ahí puedes cambiar fechas, paradas, vuelos, terminales, localizadores, hoteles y notas sin tocar el diseño.
     </section>
   </main>
 
   <script>
-    // =========================
-    // DATOS EDITABLES DEL VIAJE
-    // =========================
+    /************************************************************
+     * CONFIGURACION EDITABLE
+     * Cambia los datos de esta zona cuando tengas más información.
+     ************************************************************/
 
-    const FECHA_INICIO = "2026-05-26T07:00:00+02:00";
+    const FECHA_INICIO = "2026-05-26T17:55:00+02:00";
 
     const PARADAS = [
       {
         id: "madrid",
-        nombre: "Madrid",
+        nombre: "Madrid Barajas",
         tipo: "Salida",
         fecha: "26 mayo",
         llegada: "—",
-        salida: "07:00",
-        siguiente: "Aeropuerto / estación",
-        posicion: { top: "72%", left: "18%" },
-        resumen: "Punto de encuentro y salida del grupo.",
-        detalles: ["Quedada pendiente de confirmar", "Revisar documentación y entradas", "Salida hacia el primer transporte"]
+        salida: "17:55",
+        siguiente: "Vuelo W6 1474 a Varsovia",
+        posicion: { top: "78%", left: "13%" },
+        resumen: "Inicio del viaje europeo desde Madrid-Barajas.",
+        detalles: [
+          "Comprado en kiwi.com",
+          "Compañía: Wizz Air",
+          "Vuelo: W6 1474"
+        ]
       },
       {
-        id: "escala",
-        nombre: "Escala",
-        tipo: "Conexión",
-        fecha: "26 mayo",
-        llegada: "10:15",
-        salida: "12:05",
-        siguiente: "Ciudad de destino",
-        posicion: { top: "45%", left: "48%" },
-        resumen: "Parada intermedia con margen para cambiar de transporte.",
-        detalles: ["Escala: sí", "Tiempo de conexión: 1h 50m", "Terminal / andén por confirmar"]
+        id: "varsovia",
+        nombre: "Varsovia Chopin",
+        tipo: "Escala larga",
+        fecha: "26-27 mayo",
+        llegada: "21:25",
+        salida: "06:25",
+        siguiente: "Vuelo W6 1323 a La Canea",
+        posicion: { top: "24%", left: "50%" },
+        resumen: "Escala nocturna en Varsovia con reserva para dormir cerca del aeropuerto.",
+        detalles: [
+          "Escala aproximada: 9h",
+          "Hotel reservado: Hotel Gordon",
+          "Aeropuerto: Varsovia Chopin"
+        ]
       },
       {
-        id: "destino",
-        nombre: "Destino final",
-        tipo: "Llegada",
-        fecha: "26 mayo",
-        llegada: "14:20",
-        salida: "—",
-        siguiente: "Hotel / alojamiento",
-        posicion: { top: "26%", left: "76%" },
-        resumen: "Llegada, check-in y tarde libre antes del partido.",
-        detalles: ["Traslado al alojamiento", "Check-in pendiente", "Plan de tarde con el grupo"]
+        id: "chania",
+        nombre: "La Canea",
+        tipo: "Escala",
+        fecha: "27 mayo",
+        llegada: "09:55",
+        salida: "12:00",
+        siguiente: "Vuelo DE 6189 a Leipzig",
+        posicion: { top: "50%", left: "76%" },
+        resumen: "Escala corta en el Aeropuerto Internacional de La Canea antes del último vuelo de ida.",
+        detalles: [
+          "Escala: 2h 5m",
+          "Llegada con Wizz Air W6 1323",
+          "Salida con Condor DE 6189"
+        ]
+      },
+      {
+        id: "leipzig",
+        nombre: "Leipzig Halle",
+        tipo: "Llegada ida",
+        fecha: "27 mayo",
+        llegada: "14:05",
+        salida: "Traslado posterior",
+        siguiente: "Red Bull Arena",
+        posicion: { top: "72%", left: "56%" },
+        resumen: "Llegada al aeropuerto de Leipzig Halle y traslado hacia la zona del estadio.",
+        detalles: [
+          "Transporte pendiente: taxi o transporte público",
+          "Destino del traslado: Red Bull Arena",
+          "Revisar tiempos reales el mismo día"
+        ]
       },
       {
         id: "estadio",
-        nombre: "Estadio",
-        tipo: "Final Conference League",
+        nombre: "Red Bull Arena",
+        tipo: "Partido",
         fecha: "27 mayo",
-        llegada: "Por definir",
+        llegada: "Por confirmar",
         salida: "Tras el partido",
-        siguiente: "Celebración / vuelta al alojamiento",
-        posicion: { top: "18%", left: "62%" },
-        resumen: "Día grande: final europea del Rayo Vallecano.",
-        detalles: ["Entradas: abonados", "Hora de acceso por confirmar", "Punto de encuentro rayista pendiente"]
+        siguiente: "Leipzig / alojamiento",
+        posicion: { top: "52%", left: "85%" },
+        resumen: "Objetivo del viaje: animar al Rayo en Europa.",
+        detalles: [
+          "Añadir puerta, sector, fila y asiento cuando estén disponibles",
+          "Punto de encuentro por definir",
+          "Llevar entrada, DNI y bufanda"
+        ]
       },
       {
-        id: "vuelta",
-        nombre: "Regreso",
+        id: "berlin",
+        nombre: "Berlín Hbf / BER",
         tipo: "Vuelta",
         fecha: "28 mayo",
-        llegada: "—",
-        salida: "11:30",
-        siguiente: "Madrid",
-        posicion: { top: "58%", left: "66%" },
-        resumen: "Salida de vuelta a casa.",
-        detalles: ["Revisar check-out", "Transporte al aeropuerto / estación", "Llegada a Madrid pendiente"]
+        llegada: "06:47 a Berlin Hbf (tief)",
+        salida: "09:15 desde BER T1",
+        siguiente: "Vuelo JU 355 a Belgrado",
+        posicion: { top: "30%", left: "52%" },
+        resumen: "Trayecto temprano desde Leipzig a Berlín y traslado al aeropuerto Brandenburg.",
+        detalles: [
+          "Tren RE 16104 desde Leipzig Hbf",
+          "Traslado pendiente a Berlin Brandenburg: taxi o tren",
+          "Vuelo Air Serbia JU 355 desde Terminal 1"
+        ]
+      },
+      {
+        id: "belgrado",
+        nombre: "Belgrado",
+        tipo: "Escala vuelta",
+        fecha: "28 mayo",
+        llegada: "11:05 · Terminal 2",
+        salida: "14:25",
+        siguiente: "Vuelo JU 572 a Madrid",
+        posicion: { top: "43%", left: "48%" },
+        resumen: "Escala de vuelta con Air Serbia antes del último vuelo a Madrid.",
+        detalles: [
+          "Escala: 3h 20m",
+          "Booking reference: LDOHPN",
+          "Compañía: Air Serbia"
+        ]
+      },
+      {
+        id: "madrid-vuelta",
+        nombre: "Madrid Barajas T1",
+        tipo: "Llegada final",
+        fecha: "28 mayo",
+        llegada: "18:00",
+        salida: "—",
+        siguiente: "Vallecas",
+        posicion: { top: "78%", left: "13%" },
+        resumen: "Llegada final a Madrid-Barajas tras la aventura europea.",
+        detalles: [
+          "Vuelo JU 572",
+          "Llegada a Terminal 1",
+          "Fin del viaje"
+        ]
       }
     ];
 
     const TRAYECTOS = [
       {
-        titulo: "Madrid → Escala",
-        tipo: "✈️ Vuelo",
-        fecha: "26 mayo 2026",
-        salidaHora: "07:00",
-        llegadaHora: "10:15",
-        origen: "Madrid",
-        destino: "Escala",
-        terminalSalida: "T4 / por confirmar",
-        terminalLlegada: "Terminal por confirmar",
-        compraId: "ABC123-EJEMPLO",
-        facturado: false,
-        equipaje: "Equipaje de mano",
-        notas: "Añadir aerolínea, localizador, asientos y enlace de check-in."
-      },
-      {
-        titulo: "Escala → Destino final",
-        tipo: "✈️ Vuelo",
-        fecha: "26 mayo 2026",
-        salidaHora: "12:05",
-        llegadaHora: "14:20",
-        origen: "Escala",
-        destino: "Destino final",
+        titulo: "Madrid Barajas → Varsovia Chopin",
+        modo: "Vuelo",
+        fecha: "26 mayo",
+        origen: "Madrid Barajas",
+        destino: "Varsovia Chopin",
+        salida: "17:55",
+        llegada: "21:25",
+        comprado: "kiwi.com",
+        compania: "Wizz Air",
+        id: "W6 1474",
         terminalSalida: "Por confirmar",
         terminalLlegada: "Por confirmar",
-        compraId: "DEF456-EJEMPLO",
-        facturado: false,
-        equipaje: "Incluido / por revisar",
-        notas: "Marcar si la escala es de la misma reserva o son compras separadas."
+        facturado: "Pendiente",
+        equipaje: "Por confirmar",
+        nota: "Primer vuelo de la ida. Añadir terminal, asientos y enlace de check-in cuando estén disponibles."
       },
       {
-        titulo: "Alojamiento → Estadio",
-        tipo: "🏆 Partido",
-        fecha: "27 mayo 2026",
-        salidaHora: "Por definir",
-        llegadaHora: "Por definir",
-        origen: "Alojamiento",
-        destino: "Estadio",
-        terminalSalida: "—",
-        terminalLlegada: "Puerta / acceso por confirmar",
-        compraId: "Entradas abonados Rayo",
-        facturado: true,
-        equipaje: "Bufanda, entrada y DNI",
-        notas: "Añadir horario del partido, puerta, sector, fila y asiento."
+        titulo: "Noche en Varsovia",
+        modo: "Hotel",
+        fecha: "26-27 mayo",
+        origen: "Varsovia Chopin",
+        destino: "Hotel Gordon",
+        salida: "Tras aterrizar",
+        llegada: "Noche",
+        comprado: "Reserva hotel",
+        compania: "Hotel Gordon",
+        id: "Reserva por añadir",
+        terminalSalida: "Aeropuerto Chopin",
+        terminalLlegada: "Hotel Gordon",
+        facturado: "No aplica",
+        equipaje: "Llevar todo encima",
+        nota: "Escala de unas 9 horas. Confirmar dirección, check-in, check-out y transporte aeropuerto-hotel."
       },
       {
-        titulo: "Destino final → Madrid",
-        tipo: "🚆 Vuelta",
-        fecha: "28 mayo 2026",
-        salidaHora: "11:30",
-        llegadaHora: "16:45",
-        origen: "Destino final",
-        destino: "Madrid",
+        titulo: "Varsovia Chopin → La Canea",
+        modo: "Vuelo",
+        fecha: "27 mayo",
+        origen: "Varsovia Chopin",
+        destino: "Aeropuerto Internacional de La Canea",
+        salida: "06:25",
+        llegada: "09:55",
+        comprado: "kiwi.com",
+        compania: "Wizz Air",
+        id: "W6 1323",
         terminalSalida: "Por confirmar",
         terminalLlegada: "Por confirmar",
-        compraId: "GHI789-EJEMPLO",
-        facturado: false,
-        equipaje: "Pendiente",
-        notas: "Añadir transporte real, localizador y detalles de llegada."
+        facturado: "Pendiente",
+        equipaje: "Por confirmar",
+        nota: "Vuelo temprano. Conviene salir del hotel con margen suficiente."
+      },
+      {
+        titulo: "Escala en La Canea",
+        modo: "Escala",
+        fecha: "27 mayo",
+        origen: "La Canea",
+        destino: "La Canea",
+        salida: "09:55",
+        llegada: "12:00",
+        comprado: "kiwi.com",
+        compania: "—",
+        id: "Escala 2h 5m",
+        terminalSalida: "Por confirmar",
+        terminalLlegada: "Por confirmar",
+        facturado: "No aplica",
+        equipaje: "Revisar si hay que recoger equipaje",
+        nota: "Escala de 2h 5m. Confirmar si los vuelos van conectados o si hay que volver a pasar controles."
+      },
+      {
+        titulo: "La Canea → Leipzig Halle",
+        modo: "Vuelo",
+        fecha: "27 mayo",
+        origen: "Aeropuerto Internacional de La Canea",
+        destino: "Leipzig Halle",
+        salida: "12:00",
+        llegada: "14:05",
+        comprado: "kiwi.com",
+        compania: "Condor",
+        id: "DE 6189",
+        terminalSalida: "Por confirmar",
+        terminalLlegada: "Por confirmar",
+        facturado: "Pendiente",
+        equipaje: "Por confirmar",
+        nota: "Último vuelo de ida antes de ir hacia el estadio."
+      },
+      {
+        titulo: "Leipzig Halle → Red Bull Arena",
+        modo: "Traslado",
+        fecha: "27 mayo",
+        origen: "Aeropuerto Leipzig Halle",
+        destino: "Red Bull Arena",
+        salida: "Tras aterrizar",
+        llegada: "Por definir",
+        comprado: "Pendiente",
+        compania: "Taxi o transporte público",
+        id: "Por decidir",
+        terminalSalida: "Aeropuerto",
+        terminalLlegada: "Estadio",
+        facturado: "No aplica",
+        equipaje: "Llevar encima / guardar si procede",
+        nota: "Decidir entre taxi o transporte público según tiempo disponible y precio."
+      },
+      {
+        titulo: "Leipzig Hbf → Berlin Hbf (tief)",
+        modo: "Tren",
+        fecha: "28 mayo",
+        origen: "Leipzig Hbf",
+        destino: "Berlin Hbf (tief)",
+        salida: "05:21",
+        llegada: "06:47",
+        comprado: "Trainline",
+        compania: "Tren regional",
+        id: "RE 16104",
+        terminalSalida: "Leipzig Hbf",
+        terminalLlegada: "Berlin Hbf (tief)",
+        facturado: "No aplica",
+        equipaje: "Equipaje personal",
+        nota: "Salida muy temprana. Revisar andén la noche anterior y margen desde el alojamiento."
+      },
+      {
+        titulo: "Berlin Hbf → Berlin Brandenburg",
+        modo: "Traslado",
+        fecha: "28 mayo",
+        origen: "Berlin Hbf",
+        destino: "Aeropuerto Berlin Brandenburg",
+        salida: "Tras llegar a Berlín",
+        llegada: "Antes de las 09:15",
+        comprado: "Pendiente",
+        compania: "Taxi o tren",
+        id: "Por decidir",
+        terminalSalida: "Berlin Hbf",
+        terminalLlegada: "BER Terminal 1",
+        facturado: "No aplica",
+        equipaje: "Equipaje personal",
+        nota: "Confirmar la mejor ruta para llegar con margen al vuelo de Air Serbia."
+      },
+      {
+        titulo: "Berlin Brandenburg → Belgrado",
+        modo: "Vuelo",
+        fecha: "28 mayo",
+        origen: "Berlin Brandenburg T1",
+        destino: "Belgrado T2",
+        salida: "09:15",
+        llegada: "11:05",
+        comprado: "Air Serbia",
+        compania: "Air Serbia",
+        id: "JU 355 · Ref. LDOHPN",
+        terminalSalida: "Terminal 1",
+        terminalLlegada: "Terminal 2",
+        facturado: "Pendiente",
+        equipaje: "Por confirmar",
+        nota: "Booking reference LDOHPN. Añadir asientos y check-in cuando estén disponibles."
+      },
+      {
+        titulo: "Escala en Belgrado",
+        modo: "Escala",
+        fecha: "28 mayo",
+        origen: "Belgrado T2",
+        destino: "Belgrado T2",
+        salida: "11:05",
+        llegada: "14:25",
+        comprado: "Air Serbia",
+        compania: "Air Serbia",
+        id: "Escala 3h 20m",
+        terminalSalida: "Terminal 2",
+        terminalLlegada: "Terminal 2",
+        facturado: "No aplica",
+        equipaje: "Revisar conexión",
+        nota: "Escala de 3h 20m antes del vuelo final a Madrid."
+      },
+      {
+        titulo: "Belgrado → Madrid Barajas",
+        modo: "Vuelo",
+        fecha: "28 mayo",
+        origen: "Belgrado",
+        destino: "Madrid Barajas T1",
+        salida: "14:25",
+        llegada: "18:00",
+        comprado: "Air Serbia",
+        compania: "Air Serbia",
+        id: "JU 572 · Ref. LDOHPN",
+        terminalSalida: "Por confirmar",
+        terminalLlegada: "Terminal 1",
+        facturado: "Pendiente",
+        equipaje: "Por confirmar",
+        nota: "Último vuelo del viaje. Llegada prevista a Madrid a las 18:00."
       }
     ];
 
-    // =========================
-    // NO HACE FALTA TOCAR DE AQUI PARA ABAJO
-    // =========================
+    /************************************************************
+     * FIN DE CONFIGURACION EDITABLE
+     ************************************************************/
 
-    function renderCountdown(){
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function updateCountdown() {
       const target = new Date(FECHA_INICIO).getTime();
       const now = Date.now();
       const diff = Math.max(0, target - now);
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff / (1000*60*60)) % 24);
-      const minutes = Math.floor((diff / (1000*60)) % 60);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
-      const data = [["Días",days],["Horas",hours],["Min",minutes],["Seg",seconds]];
-      document.getElementById("countdown").innerHTML = data.map(([label,value]) => `
-        <div class="timebox"><div class="num">${String(value).padStart(2,"0")}</div><div class="lbl">${label}</div></div>
-      `).join("");
+      document.getElementById("days").textContent = pad(days);
+      document.getElementById("hours").textContent = pad(hours);
+      document.getElementById("minutes").textContent = pad(minutes);
+      document.getElementById("seconds").textContent = pad(seconds);
     }
 
-    function selectStop(id){
-      const stop = PARADAS.find(p => p.id === id) || PARADAS[0];
-      document.getElementById("stopPanel").innerHTML = `
-        <span class="pill">${stop.tipo}</span>
-        <h3>${stop.nombre}</h3>
-        <p class="muted">${stop.resumen}</p>
-        <div class="info-grid">
-          <div class="info"><small>Fecha</small><strong>${stop.fecha}</strong></div>
-          <div class="info"><small>Siguiente</small><strong>${stop.siguiente}</strong></div>
-          <div class="info"><small>Llegada</small><strong>${stop.llegada}</strong></div>
-          <div class="info"><small>Salida</small><strong>${stop.salida}</strong></div>
+    function renderPins() {
+      const map = document.getElementById("map");
+      PARADAS.forEach((parada, index) => {
+        const button = document.createElement("button");
+        button.className = "pin" + (index === 0 ? " active" : "");
+        button.style.top = parada.posicion.top;
+        button.style.left = parada.posicion.left;
+        button.textContent = index + 1;
+        button.setAttribute("aria-label", parada.nombre);
+        button.onclick = () => selectStop(parada.id);
+
+        const label = document.createElement("span");
+        label.className = "pin-label";
+        label.textContent = parada.nombre;
+        button.appendChild(label);
+        map.appendChild(button);
+      });
+    }
+
+    function selectStop(id) {
+      const parada = PARADAS.find(item => item.id === id) || PARADAS[0];
+      document.querySelectorAll(".pin").forEach((pin, index) => {
+        pin.classList.toggle("active", PARADAS[index].id === id);
+      });
+
+      document.getElementById("stopInfo").innerHTML = `
+        <span class="tag">${parada.tipo}</span>
+        <h3>${parada.nombre}</h3>
+        <p>${parada.resumen}</p>
+        <div class="facts">
+          <div class="fact"><small>Fecha</small><strong>${parada.fecha}</strong></div>
+          <div class="fact"><small>Siguiente</small><strong>${parada.siguiente}</strong></div>
+          <div class="fact"><small>Llegada</small><strong>${parada.llegada}</strong></div>
+          <div class="fact"><small>Salida</small><strong>${parada.salida}</strong></div>
         </div>
-        ${stop.detalles.map(d => `<div class="detail">› ${d}</div>`).join("")}
+        <ul class="details">
+          ${parada.detalles.map(detalle => `<li>${detalle}</li>`).join("")}
+        </ul>
       `;
     }
 
-    function renderMap(){
-      const map = document.getElementById("map");
-      PARADAS.forEach((p, index) => {
-        const btn = document.createElement("button");
-        btn.className = "stop";
-        btn.style.top = p.posicion.top;
-        btn.style.left = p.posicion.left;
-        btn.innerHTML = `${index + 1}<span>${p.nombre}</span>`;
-        btn.onclick = () => selectStop(p.id);
-        map.appendChild(btn);
-      });
-      selectStop(PARADAS[0].id);
-    }
-
-    function renderSegments(){
-      document.getElementById("segmentCount").textContent = `${TRAYECTOS.length} movimientos`;
-      document.getElementById("segments").innerHTML = TRAYECTOS.map(t => `
-        <article class="segment card">
+    function renderSegments() {
+      const grid = document.getElementById("segmentsGrid");
+      grid.innerHTML = TRAYECTOS.map(t => `
+        <article class="segment">
           <div class="segment-head">
             <div>
-              <div class="muted">${t.tipo} · ${t.fecha}</div>
               <h3>${t.titulo}</h3>
+              <p style="margin:6px 0 0;color:var(--muted);font-size:14px;">${t.fecha} · ${t.compania}</p>
             </div>
-            <span class="status ${t.facturado ? "ok" : "no"}">${t.facturado ? "Facturado" : "No facturado"}</span>
+            <span class="mode">${t.modo}</span>
           </div>
-          <div class="journey">
-            <div><div class="muted">Salida</div><div class="hour">${t.salidaHora}</div><div>${t.origen}</div></div>
+
+          <div class="time-row">
+            <div><small>Salida</small><strong>${t.salida}</strong><span>${t.origen}</span></div>
             <div class="arrow">→</div>
-            <div class="right"><div class="muted">Llegada</div><div class="hour">${t.llegadaHora}</div><div>${t.destino}</div></div>
+            <div class="right"><small>Llegada</small><strong>${t.llegada}</strong><span>${t.destino}</span></div>
           </div>
-          <div class="fields">
-            <div class="field"><small>Terminal salida</small><strong>${t.terminalSalida}</strong></div>
-            <div class="field"><small>Terminal llegada</small><strong>${t.terminalLlegada}</strong></div>
-            <div class="field"><small>ID compra / localizador</small><strong>${t.compraId}</strong></div>
-            <div class="field"><small>Equipaje</small><strong>${t.equipaje}</strong></div>
+
+          <div class="segment-data">
+            <div class="data"><small>Comprado en</small><strong>${t.comprado}</strong></div>
+            <div class="data"><small>ID / Vuelo / Reserva</small><strong>${t.id}</strong></div>
+            <div class="data"><small>Salida</small><strong>${t.terminalSalida}</strong></div>
+            <div class="data"><small>Llegada</small><strong>${t.terminalLlegada}</strong></div>
+            <div class="data"><small>Facturación</small><strong>${t.facturado}</strong></div>
+            <div class="data"><small>Equipaje</small><strong>${t.equipaje}</strong></div>
           </div>
-          <div class="notes">${t.notas}</div>
+          <div class="note">${t.nota}</div>
         </article>
       `).join("");
     }
 
-    renderCountdown();
-    setInterval(renderCountdown, 1000);
-    renderMap();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    renderPins();
+    selectStop(PARADAS[0].id);
     renderSegments();
   </script>
 </body>
